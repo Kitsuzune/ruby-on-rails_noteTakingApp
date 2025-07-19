@@ -1,0 +1,46 @@
+<div style="min-height: 100vh; background-color: #f8f9fa; padding: 2rem 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden;">
+        <div style="background-color: #059669; color: white; padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
+            <h1 style="margin: 0; font-size: 1.5rem; font-weight: bold;">Create New Note</h1>
+        </div>
+        
+        <div style="padding: 2rem;">
+            <%= form_with(model: @note, local: true) do |form| %>
+                <% if @note.errors.any? %>
+                    <div style="background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 1rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: flex-start;">
+                            <svg style="width: 20px; height: 20px; color: #f87171; margin-right: 0.75rem; flex-shrink: 0;" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                            <div>
+                                <h3 style="font-size: 0.875rem; font-weight: 500; color: #991b1b; margin: 0;">
+                                    <%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:
+                                </h3>
+                                <ul style="margin-top: 0.5rem; font-size: 0.875rem; color: #7f1d1d; padding-left: 1.25rem;">
+                                    <% @note.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <%= form.label :title, style: "display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem;" %>
+                    <%= form.text_field :title, placeholder: "Enter note title...", style: "width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.875rem; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box;" %>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <%= form.label :content, style: "display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem;" %>
+                    <%= form.text_area :content, placeholder: "Write your note here...", style: "width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.875rem; resize: vertical; min-height: 120px; font-family: inherit; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box;" %>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid #e5e7eb; margin-top: 1.5rem;">
+                    <%= link_to 'Back to Notes', notes_path, style: "padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; border-radius: 6px; text-decoration: none; border: 1px solid #d1d5db; color: #374151; background-color: #f3f4f6; transition: all 0.2s; display: inline-block;" %>
+                    <%= form.submit 'Create Note', style: "padding: 0.75rem 1.5rem; font-size: 0.875rem; font-weight: 500; border-radius: 6px; border: 1px solid transparent; color: white; background-color: #059669; cursor: pointer; transition: all 0.2s;" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
